@@ -4,9 +4,10 @@ var {promisify} = require("util");
 const readFile = promisify(fs.readFile);
 
 gulp.task('default', ['less', "mustache"], function() {
-  gulp.watch('./src/styles/**/*.less', ['less']);
+  gulp.watch('./src/style/**/*.less', ['less']);
+  gulp.watch("./src/image/*.*", ["copy"]);
   gulp.watch([
-    './src/data/db.json',
+    './src/data/data.json',
     './src/**/*.html'
   ], ['mustache']);
 });
@@ -15,7 +16,7 @@ var less = require('gulp-less');
 var path = require('path');
 
 gulp.task('less', function () {
-  return gulp.src('./src/styles/**/*.less')
+  return gulp.src('./src/style/**/*.less')
   .pipe(less({
     paths: [ path.join(__dirname, 'less', 'includes') ]
   }))
@@ -24,10 +25,14 @@ gulp.task('less', function () {
 
 var mustache = require("gulp-mustache");
 gulp.task("mustache", async () => {
-  const data = JSON.parse(await readFile("./src/data/db.json", "utf-8"));
+  const data = JSON.parse(await readFile("./src/data/data.json", "utf-8"));
 
   return gulp.src("./src/**/*.html")
   .pipe(mustache(data))
   .pipe(gulp.dest("./docs"));
 })
 
+gulp.task('copy', function () {
+    gulp.src('./src/image/*.*')
+        .pipe(gulp.dest('./docs/image/'));
+});

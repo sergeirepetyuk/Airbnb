@@ -1,4 +1,6 @@
 body {
-  background: red;
-  margin: 0;
+  margin: 0 auto;
+}
+.Header {
+  margin-top: 6px;
 }

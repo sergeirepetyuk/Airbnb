@@ -1,0 +1,56 @@
+.Footer {
+  margin-top: 45px;
+}
+.Language {
+  margin-bottom: 8px;
+}
+.Language__select {
+  width: 246px;
+  height: 46px;
+}
+.Payment-currency__select {
+  width: 246px;
+  height: 46px;
+}
+.Additional-info {
+  padding-left: 20px;
+  color: #484848;
+  font-family: SFUIText, sans-serif;
+  font-size: 15px;
+  display: flex;
+}
+.Additional-info__item {
+  margin-left: 10px;
+  margin-right: 90px;
+}
+.Additional-info__item_link {
+  text-decoration: none;
+  color: #484848;
+  display: block;
+  margin-bottom: 4px;
+}
+.Additional-info__item_title {
+  margin-top: 0px;
+}
+.Extra {
+  margin-bottom: 100px;
+}
+.Divider {
+  width: 100%;
+  height: 1px;
+  background-color: #dbdbdb;
+  margin-top: 52px;
+  margin-bottom: 48px;
+}
+.Copyright {
+  font-family: SFUIText, sans-serif;
+  font-size: 15px;
+  color: #767676;
+  margin-right: 730px;
+}
+.Terms-Privacy-SiteMap__item {
+  text-decoration: none;
+  font-family: SFUIText, sans-serif;
+  font-size: 15px;
+  color: #767676;
+}

@@ -1,16 +1,8 @@
 var gulp = require('gulp');
 var fs = require("fs");
 var {promisify} = require("util");
+const browserSync = require('browser-sync').create();
 const readFile = promisify(fs.readFile);
-
-gulp.task('default', ['less', "mustache"], function() {
-  gulp.watch('./src/style/**/*.less', ['less']);
-  gulp.watch("./src/image/*.*", ["copy"]);
-  gulp.watch([
-    './src/data/data.json',
-    './src/**/*.html'
-  ], ['mustache']);
-});
 
 var less = require('gulp-less');
 var path = require('path');
@@ -20,7 +12,8 @@ gulp.task('less', function () {
   .pipe(less({
     paths: [ path.join(__dirname, 'less', 'includes') ]
   }))
-  .pipe(gulp.dest('./docs/css'));
+  .pipe(gulp.dest('./docs/style'))
+  .pipe(browserSync.stream());
 });
 
 var mustache = require("gulp-mustache");
@@ -33,6 +26,22 @@ gulp.task("mustache", async () => {
 })
 
 gulp.task('copy', function () {
-    gulp.src('./src/image/*.*')
-        .pipe(gulp.dest('./docs/image/'));
+    gulp.src('./src/images/*.*')
+        .pipe(gulp.dest('./docs/images/'));
+});
+
+
+gulp.task('default', ["less", "mustache"], function () {
+    browserSync.init({
+        server: "./docs"
+    });
+
+    gulp.watch('./src/style/**/*.less', ['less']);
+    gulp.watch("./src/images/*.*", ["copy"]);
+
+    gulp.watch([
+        './src/data/data.json',
+        './src/**/*.html'
+    ], ['mustache'])
+    .on('change', browserSync.reload);
 });
